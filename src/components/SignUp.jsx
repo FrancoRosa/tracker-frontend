@@ -1,23 +1,41 @@
 import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { apiSignUp } from '../backend';
 
-const createUser = () => {
-  console.log('la Pupa');
-  apiSignUp('x', 'x@mail.com', '123');
-};
+const SignUp = () => {
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-const SignUp = () => (
-  <div>
-    <p>name:</p>
-    <input type="text" />
-    <p>email:</p>
-    <input type="email" />
-    <p>password:</p>
-    <input type="password" />
-    <br />
-    <button type="button" onClick={createUser}>Sign up</button>
-    <Link to="/signin">Sign in</Link>
-  </div>
-);
+  const signup = () => {
+    apiSignUp(name, email, password);
+  };
+
+  return (
+    <div>
+      <p>name:</p>
+      <input
+        type="text"
+        value={name}
+        onChange={e => setName(e.target.value)}
+      />
+      <p>email:</p>
+      <input
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+      />
+      <p>password:</p>
+      <input
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+      />
+      <br />
+      <button type="button" onClick={signup}>Sign up</button>
+      <Link to="/signin">Sign in</Link>
+    </div>
+  );
+};
 
 export default SignUp;
