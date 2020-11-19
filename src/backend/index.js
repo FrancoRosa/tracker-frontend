@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/';
+export const API_URL = 'http://localhost:3000/';
 
 export const apiSignUp = async (name, email, password) => {
   const obj = {

@@ -33,6 +33,7 @@ const SignUp = () => {
       />
       <br />
       <button type="button" onClick={signup}>Sign up</button>
+      <br />
       <Link to="/signin">Sign in</Link>
     </div>
   );
