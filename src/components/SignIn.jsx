@@ -23,12 +23,9 @@ const SignIn = ({
       },
     };
     const { data: response } = await axios.post(`${API_URL}signin`, obj);
-    console.log(response);
     if (response.name) {
-      console.log('Sift idd');
       setUser(response);
     } else {
-      console.log('ELSE');
       setError(response.error);
     }
   };
