@@ -13,8 +13,6 @@ const Tracks = ({
   setTracks,
   setError,
 }) => {
-  // 1.- Load all tracks from USER
-  // 2.- Add a new track
   const [track, setTrack] = useState('');
 
   const apiGetTracks = async () => {
@@ -31,9 +29,11 @@ const Tracks = ({
     };
     const { data: response } = await axios.post(`${API_URL}api/v1/tracks/?token=${user.token}`, obj);
     if (response.error) {
-      console.log(response);
       setError(response.error);
-    } else setTracks(response);
+    } else {
+      setTrack('');
+      setTracks(response);
+    }
   };
 
   useEffect(() => {
@@ -42,9 +42,18 @@ const Tracks = ({
 
   return (
     <div>
-      <div>
-        {tracks.map(track => <p key={track.id}>{track.name}</p>)}
-      </div>
+      <ul>
+        {tracks.map(track => (
+          <li key={track.id}>
+            <Link
+              key={track.id}
+              to={`/tracks/${track.id}`}
+            >
+              {track.name}
+            </Link>
+          </li>
+        ))}
+      </ul>
       <div>
         <input
           type="text"
