@@ -50,6 +50,7 @@ const SignIn = ({
       <button type="button" onClick={apiSignIn}>Sign in</button>
       <br />
       <Link to="/signup">Sign up</Link>
+      <Link to="/tracks">Tracks</Link>
     </div>
   );
 };

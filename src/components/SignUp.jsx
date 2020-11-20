@@ -57,7 +57,7 @@ const SignUp = ({
       {error ? <p>{error}</p> : null}
       <button type="button" onClick={apiSignUp}>Sign Up</button>
       <br />
-      <Link to="/signup">Sign up</Link>
+      <Link to="/signin">Sign In</Link>
     </div>
   );
 };
