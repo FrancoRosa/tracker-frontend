@@ -12,11 +12,13 @@ const Records = ({
   error,
   setRecords,
   setError,
+  match,
 }) => {
   const [record, setRecord] = useState('');
 
   const apiGetRecords = async () => {
-    const { data: response } = await axios.get(`${API_URL}api/v1/records/?token=${user.token}`);
+    const { data: response } = await axios.get(`${API_URL}api/v1/tracks/${match.params.id}/?token=${user.token}`);
+    console.log(response);
     if (response.error) setError(response.error);
     else setRecords(response);
   };
@@ -24,11 +26,11 @@ const Records = ({
   const apiSaveRecord = async () => {
     const obj = {
       record: {
-        name: record,
+        value: record,
       },
     };
 
-    const { data: response } = await axios.post(`${API_URL}api/v1/records/?token=${user.token}`, obj);
+    const { data: response } = await axios.post(`${API_URL}api/v1/records/?track_id=${match.params.id}&token=${user.token}`, obj);
     if (response.error) {
       setError(response.error);
     } else {
@@ -38,7 +40,7 @@ const Records = ({
   };
 
   useEffect(() => {
-    apiGetRecords();
+    apiGetRecords(match.params);
   }, []);
 
   return (
@@ -48,7 +50,7 @@ const Records = ({
       </div>
       <div>
         <input
-          type="text"
+          type="number"
           value={record}
           onChange={e => setRecord(e.target.value)}
         />
@@ -56,6 +58,7 @@ const Records = ({
         {error ? <p>{error}</p> : null}
       </div>
       <Link to="/signin">Sign in</Link>
+      <Link to="/tracks">Tracks</Link>
     </div>
   );
 };
@@ -70,6 +73,9 @@ Records.propTypes = {
   error: PropTypes.func.isRequired,
   setRecords: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
+  match: PropTypes.shape(
+    PropTypes.object,
+  ).isRequired,
 };
 
 const mapStateToProps = state => ({
