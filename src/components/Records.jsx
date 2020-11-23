@@ -17,6 +17,7 @@ const Records = ({
   const [record, setRecord] = useState('');
 
   const apiGetRecords = async () => {
+    setError('');
     const { data: response } = await axios.get(`${API_URL}api/v1/tracks/${match.params.id}/?token=${user.token}`);
     console.log(response);
     if (response.error) setError(response.error);
@@ -29,7 +30,7 @@ const Records = ({
         value: record,
       },
     };
-
+    setError('');
     const { data: response } = await axios.post(`${API_URL}api/v1/records/?track_id=${match.params.id}&token=${user.token}`, obj);
     if (response.error) {
       setError(response.error);

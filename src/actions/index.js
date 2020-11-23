@@ -1,4 +1,5 @@
 export const SET_USER = 'SET_USER';
+export const ERASE_TOKEN = 'ERASE_TOKEN';
 export const SET_ERROR = 'SET_ERROR';
 export const SET_TRACKS = 'SET_TRACKS';
 export const SET_TRACK = 'SET_TRACK';
@@ -8,6 +9,12 @@ export const setUser = user => (
   {
     user,
     type: SET_USER,
+  }
+);
+
+export const eraseToken = () => (
+  {
+    type: ERASE_TOKEN,
   }
 );
 
