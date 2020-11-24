@@ -4,20 +4,34 @@ import PropTypes from 'prop-types';
 
 const Navbar = ({ user }) => {
   const { token, name } = user;
-  if (token === '') {
+  const Content = () => {
+    if (token === '') {
+      return (
+        <div className="navbar-item">
+          <Link to="/signin" className="navbar-item">Sign in</Link>
+          <Link to="/signup" className="navbar-item">Sign up</Link>
+        </div>
+      );
+    }
     return (
-      <div>
-        <Link to="/signin">Sign in</Link>
-        <Link to="/signup">Sign up</Link>
+      <div className="navbar-item">
+        Hello
+        {' '}
+        {name}
+        <Link to="/signout" className="navbar-item">Sign Out</Link>
       </div>
     );
-  }
+  };
+
   return (
-    <div>
-      Hello
-      {name}
-      <Link to="/signout">Sign Out</Link>
-    </div>
+    <nav className="navbar is-primary is-expanded">
+      <div className="navbar-brand">
+        <div className="navbar-item">
+          <h2 className="title is-3 has-text-white">Tracker</h2>
+        </div>
+        <Content />
+      </div>
+    </nav>
   );
 };
 
