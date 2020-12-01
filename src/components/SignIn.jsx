@@ -7,10 +7,10 @@ import { setUser, setError } from '../actions';
 import { API_URL } from '../backend';
 
 const SignIn = ({
-  user,
   error,
   setUser,
   setError,
+  history,
 }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -25,6 +25,7 @@ const SignIn = ({
     const { data: response } = await axios.post(`${API_URL}signin`, obj);
     if (response.name) {
       setUser(response);
+      history.push('/');
     } else {
       setError(response.error);
     }
@@ -35,41 +36,41 @@ const SignIn = ({
   }, []);
 
   return (
-    <div>
-      <p>{user.name}</p>
-      <p>email:</p>
-      <input
-        type="email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-      />
-      <p>password:</p>
-      <input
-        type="password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-      />
-      <br />
-      {error ? <p>{error}</p> : null}
-      <button type="button" onClick={apiSignIn}>Sign in</button>
-      <br />
-      <Link to="/signup">Sign up</Link>
-      <Link to="/tracks">Tracks</Link>
+    <div className="container">
+      <div className="card">
+        <p>email:</p>
+        <input
+          type="email"
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder="track@track.com"
+        />
+        <p>password:</p>
+        <input
+          type="password"
+          value={password}
+          onChange={e => setPassword(e.target.value)}
+        />
+        <br />
+        {error ? <p>{error}</p> : null}
+        <button type="button" onClick={apiSignIn}>Sign in</button>
+        <br />
+        <Link to="/tracks">Tracks</Link>
+      </div>
     </div>
   );
 };
 
 SignIn.propTypes = {
-  user: PropTypes.shape(
+  error: PropTypes.func.isRequired,
+  history: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
-  error: PropTypes.func.isRequired,
   setUser: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  user: state.user,
   error: state.error,
 });
 

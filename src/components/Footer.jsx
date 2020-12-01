@@ -4,17 +4,23 @@ import PropTypes from 'prop-types';
 
 const Footer = ({ user }) => {
   const { token } = user;
-  if (token === '') {
+  const Content = () => {
+    if (token === '') {
+      return (
+        <div className="footer-buttons" />
+      );
+    }
     return (
-      <div>
-        {' - - - - '}
+      <div className="footer-buttons">
+        <Link to="/tracks" className="button">My Tracks</Link>
+        <Link to="/add-track" className="button">Add Tracks</Link>
       </div>
     );
-  }
+  };
+
   return (
-    <div>
-      <Link to="/tracks">Tracks</Link>
-      <Link to="/tracks">Tracks</Link>
+    <div className="footer">
+      <Content />
     </div>
   );
 };

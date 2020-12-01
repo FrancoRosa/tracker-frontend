@@ -1,48 +1,39 @@
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Navbar = ({ user }) => {
-  const { token, name } = user;
+const Navbar = ({ signed, name }) => {
   const Content = () => {
-    if (token === '') {
+    if (signed) {
       return (
-        <div className="navbar-item">
-          <Link to="/signin" className="navbar-item">Sign in</Link>
-          <Link to="/signup" className="navbar-item">Sign up</Link>
+        <div className="navbar-links">
+          <Link to="/signin" className="button">Sign in</Link>
+          <Link to="/signup" className="button">Sign up</Link>
         </div>
       );
     }
     return (
-      <div className="navbar-item">
-        Hello
-        {' '}
-        {name}
-        <Link to="/signout" className="navbar-item">Sign Out</Link>
+      <div className="navbar-links">
+        <h2 className="navbar-item is-title is-2 has-text-white">{`Hello ${name}`}</h2>
+        <Link to="/signout" className="button">Sign Out</Link>
       </div>
     );
   };
 
   return (
-    <nav className="navbar is-primary is-expanded">
+    <nav className="navbar is-primary">
       <div className="navbar-brand">
         <div className="navbar-item">
           <h2 className="title is-3 has-text-white">Tracker</h2>
         </div>
-        <Content />
       </div>
+      <Content />
     </nav>
   );
 };
 
 Navbar.propTypes = {
-  user: PropTypes.shape(
-    PropTypes.object,
-  ).isRequired,
+  signed: PropTypes.bool.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps)(Navbar);
+export default Navbar;

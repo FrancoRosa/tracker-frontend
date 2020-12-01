@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -83,7 +82,6 @@ const Tracks = ({
         <button type="button" onClick={apiSaveTrack}>Add Track</button>
         {error ? <p>{error}</p> : null}
       </div>
-      <Link to="/signin">Sign in</Link>
     </div>
   );
 };

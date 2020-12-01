@@ -58,7 +58,6 @@ const Records = ({
         <button type="button" onClick={apiSaveRecord}>Add Record</button>
         {error ? <p>{error}</p> : null}
       </div>
-      <Link to="/signin">Sign in</Link>
       <Link to="/tracks">Tracks</Link>
     </div>
   );
