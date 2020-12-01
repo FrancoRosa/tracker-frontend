@@ -1,11 +1,9 @@
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-const Footer = ({ user }) => {
-  const { token } = user;
+const Footer = ({ signed }) => {
   const Content = () => {
-    if (token === '') {
+    if (signed) {
       return (
         <div className="footer-buttons" />
       );
@@ -26,13 +24,7 @@ const Footer = ({ user }) => {
 };
 
 Footer.propTypes = {
-  user: PropTypes.shape(
-    PropTypes.object,
-  ).isRequired,
+  signed: PropTypes.bool.isRequired,
 };
 
-const mapStateToProps = state => ({
-  user: state.user,
-});
-
-export default connect(mapStateToProps)(Footer);
+export default Footer;

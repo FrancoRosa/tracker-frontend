@@ -24,7 +24,7 @@ const App = ({ user }) => {
         <Route path="/signout" component={SignOut} />
         <Route path="/" component={Welcome} />
       </Switch>
-      <Footer />
+      <Footer signed={signed} />
     </div>
   );
 };
