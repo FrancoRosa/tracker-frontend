@@ -13,7 +13,12 @@
 }
 
 .card {
-  margin: 1em;
+  margin: 2em;
+  padding: 1em;
+}
+
+.card > * {
+  margin: 1em 0;
 }
 
 .footer {
@@ -31,4 +36,17 @@
   display: flex;
   justify-content: space-around;
   width: 90%;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: grey !important;
+  opacity: 0.5 !important; /* Firefox */
+}
+
+.hello {
+  font-size: 1.3em;
+}
+
+.fas {
+  padding: 0 0.5em;
 }

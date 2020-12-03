@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -36,27 +35,30 @@ const SignIn = ({
   }, []);
 
   return (
-    <div className="container">
-      <div className="card">
-        <p>email:</p>
-        <input
-          type="email"
-          value={email}
-          onChange={e => setEmail(e.target.value)}
-          placeholder="track@track.com"
-        />
-        <p>password:</p>
-        <input
-          type="password"
-          value={password}
-          onChange={e => setPassword(e.target.value)}
-        />
-        <br />
-        {error ? <p>{error}</p> : null}
-        <button type="button" onClick={apiSignIn}>Sign in</button>
-        <br />
-        <Link to="/tracks">Tracks</Link>
-      </div>
+    <div className="card has-text-centered">
+      <input
+        className="input is-rounded "
+        type="email"
+        value={email}
+        onChange={e => setEmail(e.target.value)}
+        placeholder="Type your email here"
+      />
+      <input
+        className="input is-rounded"
+        type="password"
+        value={password}
+        onChange={e => setPassword(e.target.value)}
+        placeholder="Type your password"
+      />
+      <br />
+      {error ? <p className="has-text-danger">{error}</p> : null}
+      <button
+        className="button"
+        type="button"
+        onClick={apiSignIn}
+      >
+        Sign in
+      </button>
     </div>
   );
 };

@@ -37,29 +37,37 @@ const SignUp = ({
   }, []);
 
   return (
-    <div>
-      <p>name:</p>
+    <div className="card has-text-centered">
       <input
+        className="input is-rounded "
         type="name"
         value={name}
         onChange={e => setName(e.target.value)}
+        placeholder="Type your name here"
       />
-      <p>email:</p>
       <input
+        className="input is-rounded "
         type="email"
         value={email}
         onChange={e => setEmail(e.target.value)}
+        placeholder="Type your email"
       />
-      <p>password:</p>
       <input
+        className="input is-rounded "
         type="password"
         value={password}
         onChange={e => setPassword(e.target.value)}
+        placeholder="Type your password"
       />
       <br />
-      {error ? <p>{error}</p> : null}
-      <button type="button" onClick={apiSignUp}>Sign Up</button>
-      <br />
+      {error ? <p className="has-text-danger">{error}</p> : null}
+      <button
+        className="button"
+        type="button"
+        onClick={apiSignUp}
+      >
+        Sign Up
+      </button>
     </div>
   );
 };

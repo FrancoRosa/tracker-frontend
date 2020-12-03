@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Footer = ({ signed }) => {
   const Content = () => {
-    if (signed) {
+    if (!signed) {
       return (
         <div className="footer-buttons" />
       );
@@ -11,7 +11,7 @@ const Footer = ({ signed }) => {
     return (
       <div className="footer-buttons">
         <Link to="/tracks" className="button">My Tracks</Link>
-        <Link to="/add-track" className="button">Add Tracks</Link>
+        <Link to="/addtrack" className="button">Add Tracks</Link>
       </div>
     );
   };

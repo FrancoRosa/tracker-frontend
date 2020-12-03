@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Navbar = ({ signed, name }) => {
   const Content = () => {
-    if (signed) {
+    if (!signed) {
       return (
         <div className="navbar-links">
           <Link to="/signin" className="button">Sign in</Link>
@@ -13,7 +13,7 @@ const Navbar = ({ signed, name }) => {
     }
     return (
       <div className="navbar-links">
-        <h2 className="navbar-item is-title is-2 has-text-white">{`Hello ${name}`}</h2>
+        <p className="navbar-item is-4 has-text-white hello">{`Hello ${name}`}</p>
         <Link to="/signout" className="button">Sign Out</Link>
       </div>
     );
@@ -23,7 +23,10 @@ const Navbar = ({ signed, name }) => {
     <nav className="navbar is-primary">
       <div className="navbar-brand">
         <div className="navbar-item">
-          <h2 className="title is-3 has-text-white">Tracker</h2>
+          <h2 className="title is-3 has-text-white">
+            <i className="fas fa-file-contract" />
+            Tracker
+          </h2>
         </div>
       </div>
       <Content />

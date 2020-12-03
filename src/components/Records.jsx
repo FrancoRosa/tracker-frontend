@@ -19,7 +19,6 @@ const Records = ({
   const apiGetRecords = async () => {
     setError('');
     const { data: response } = await axios.get(`${API_URL}api/v1/tracks/${match.params.id}/?token=${user.token}`);
-    console.log(response);
     if (response.error) setError(response.error);
     else setRecords(response);
   };

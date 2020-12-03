@@ -3,13 +3,14 @@ import PropTypes from 'prop-types';
 import { useEffect } from 'react';
 import { eraseToken } from '../actions';
 
-const SignOut = ({ user, eraseToken }) => {
+const SignOut = ({ user, eraseToken, history }) => {
   useEffect(() => {
     eraseToken();
+    setTimeout(() => history.push('/'), 1500);
   }, []);
 
   return (
-    <div>
+    <div className="card">
       We will miss you
       {' '}
       {user.name}
@@ -22,6 +23,9 @@ SignOut.propTypes = {
     PropTypes.object,
   ).isRequired,
   eraseToken: PropTypes.func.isRequired,
+  history: PropTypes.shape(
+    PropTypes.object,
+  ).isRequired,
 };
 
 const mapStateToProps = state => ({

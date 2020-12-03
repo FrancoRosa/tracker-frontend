@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import axios from 'axios';
@@ -9,22 +9,21 @@ import TrackPreview from './TrackPreview';
 const Tracks = ({
   tracks,
   user,
-  error,
   setTracks,
   setTrack,
   setError,
 }) => {
-  const [track, setTrackInput] = useState('');
-  const [goal, setGoalInput] = useState('');
-  const [category, setCategoryInput] = useState('');
+  // const [track, setTrackInput] = useState('');
+  // const [goal, setGoalInput] = useState('');
+  // const [category, setCategoryInput] = useState('');
 
-  const categories = [
-    'Time',
-    'Finance',
-    'Education',
-    'Fitness',
-    'Other',
-  ];
+  // const categories = [
+  //   'Time',
+  //   'Finance',
+  //   'Education',
+  //   'Fitness',
+  //   'Other',
+  // ];
 
   const apiGetTracks = async () => {
     setError('');
@@ -33,27 +32,28 @@ const Tracks = ({
     else setTracks(response);
   };
 
-  const apiSaveTrack = async () => {
-    const obj = {
-      track: {
-        name: track,
-        category,
-        goal,
-      },
-    };
-    setError('');
-    const { data: response } = await axios.post(`${API_URL}api/v1/tracks/?token=${user.token}`, obj);
-    if (response.error) {
-      setError(response.error);
-    } else {
-      setTrackInput('');
-      setTracks(response);
-    }
-  };
+  // const apiSaveTrack = async () => {
+  //   const obj = {
+  //     track: {
+  //       name: track,
+  //       category,
+  //       goal,
+  //     },
+  //   };
+  //   setError('');
+  //   const {
+  //     data: response
+  //   } = await axios.post(`${API_URL}api/v1/tracks/?token=${user.token}`, obj);
+  //   if (response.error) {
+  //     setError(response.error);
+  //   } else {
+  //     setTrackInput('');
+  //     setTracks(response);
+  //   }
+  // };
 
   useEffect(() => {
     apiGetTracks();
-    setCategoryInput('ZZZ');
   }, []);
 
   return (
@@ -63,7 +63,7 @@ const Tracks = ({
           <TrackPreview key={track.id} track={track} setTrack={id => setTrack(id)} />
         ))}
       </ul>
-      <div>
+      {/* <div>
         <input
           type="text"
           value={track}
@@ -81,7 +81,7 @@ const Tracks = ({
         </select>
         <button type="button" onClick={apiSaveTrack}>Add Track</button>
         {error ? <p>{error}</p> : null}
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -93,7 +93,6 @@ Tracks.propTypes = {
   user: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
-  error: PropTypes.func.isRequired,
   setTracks: PropTypes.func.isRequired,
   setTrack: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
