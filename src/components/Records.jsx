@@ -6,6 +6,19 @@ import axios from 'axios';
 import { setError, setRecords } from '../actions';
 import { API_URL } from '../backend';
 
+const Record = ({ record }) => (
+  <div className="card">
+    <p>{record.value}</p>
+    <p>{record.created_at}</p>
+  </div>
+);
+
+Record.propTypes = {
+  record: PropTypes.shape(
+    PropTypes.object,
+  ).isRequired,
+};
+
 const Records = ({
   records,
   user,
@@ -13,8 +26,9 @@ const Records = ({
   setRecords,
   setError,
   match,
+  history,
 }) => {
-  const [record, setRecord] = useState('');
+  const [recordInput, setRecordInput] = useState('');
 
   const apiGetRecords = async () => {
     setError('');
@@ -26,7 +40,7 @@ const Records = ({
   const apiSaveRecord = async () => {
     const obj = {
       record: {
-        value: record,
+        value: recordInput,
       },
     };
     setError('');
@@ -34,8 +48,18 @@ const Records = ({
     if (response.error) {
       setError(response.error);
     } else {
-      setRecord('');
+      setRecordInput('');
       setRecords(response);
+    }
+  };
+
+  const apiDeleteTrack = async () => {
+    setError('');
+    const { data: response } = await axios.delete(`${API_URL}api/v1/tracks/${match.params.id}/?token=${user.token}`);
+    if (response.error) {
+      setError(response.error);
+    } else {
+      history.push('/tracks');
     }
   };
 
@@ -44,27 +68,32 @@ const Records = ({
   }, []);
 
   return (
-    <div>
-      <div>
-        {records.map(record => <p key={record.id}>{record.value}</p>)}
-      </div>
+    <div className="hscroll">
+      {records.map(record => <Record key={record.id} record={record} />)}
       <div>
         <input
           type="number"
-          value={record}
-          onChange={e => setRecord(e.target.value)}
+          value={recordInput}
+          onChange={e => setRecordInput(e.target.value)}
         />
         <button type="button" onClick={apiSaveRecord}>Add Record</button>
         {error ? <p>{error}</p> : null}
       </div>
       <Link to="/tracks">Tracks</Link>
+      <button
+        type="button"
+        className="button"
+        onClick={apiDeleteTrack}
+      >
+        DeleteTrack
+      </button>
     </div>
   );
 };
 
 Records.propTypes = {
   records: PropTypes.arrayOf(
-    PropTypes.string,
+    PropTypes.object,
   ).isRequired,
   user: PropTypes.shape(
     PropTypes.object,
@@ -73,6 +102,9 @@ Records.propTypes = {
   setRecords: PropTypes.func.isRequired,
   setError: PropTypes.func.isRequired,
   match: PropTypes.shape(
+    PropTypes.object,
+  ).isRequired,
+  history: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
 };

@@ -76,7 +76,7 @@ const AddTrack = ({
             setSuccessInput('');
           }}
         >
-          <option value="" disabled selected>Select a category</option>
+          <option value="" disabled>Select a category</option>
           {categories.map(category => <option key={category}>{category}</option>)}
         </select>
       </span>

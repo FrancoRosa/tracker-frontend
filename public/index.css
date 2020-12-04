@@ -50,3 +50,21 @@
 .fas {
   padding: 0 0.5em;
 }
+
+.hscroll {
+  overflow: scroll;
+  white-space: nowrap;
+  height: 80vh;
+}
+
+.hscroll::-webkit-scrollbar {
+  display: none;
+}
+
+.circle {
+  width: 5em;
+}
+
+.trackIcon {
+  font-size: 5em;
+}

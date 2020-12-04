@@ -13,18 +13,6 @@ const Tracks = ({
   setTrack,
   setError,
 }) => {
-  // const [track, setTrackInput] = useState('');
-  // const [goal, setGoalInput] = useState('');
-  // const [category, setCategoryInput] = useState('');
-
-  // const categories = [
-  //   'Time',
-  //   'Finance',
-  //   'Education',
-  //   'Fitness',
-  //   'Other',
-  // ];
-
   const apiGetTracks = async () => {
     setError('');
     const { data: response } = await axios.get(`${API_URL}api/v1/tracks/?token=${user.token}`);
@@ -32,56 +20,15 @@ const Tracks = ({
     else setTracks(response);
   };
 
-  // const apiSaveTrack = async () => {
-  //   const obj = {
-  //     track: {
-  //       name: track,
-  //       category,
-  //       goal,
-  //     },
-  //   };
-  //   setError('');
-  //   const {
-  //     data: response
-  //   } = await axios.post(`${API_URL}api/v1/tracks/?token=${user.token}`, obj);
-  //   if (response.error) {
-  //     setError(response.error);
-  //   } else {
-  //     setTrackInput('');
-  //     setTracks(response);
-  //   }
-  // };
-
   useEffect(() => {
     apiGetTracks();
   }, []);
 
   return (
-    <div>
-      <ul>
-        {tracks.map(track => (
-          <TrackPreview key={track.id} track={track} setTrack={id => setTrack(id)} />
-        ))}
-      </ul>
-      {/* <div>
-        <input
-          type="text"
-          value={track}
-          placeholder="TrackName"
-          onChange={e => setTrackInput(e.target.value)}
-        />
-        <input
-          type="number"
-          value={goal}
-          placeholder="Set a goal"
-          onChange={e => setGoalInput(e.target.value)}
-        />
-        <select name="" value={category} onChange={e => setCategoryInput(e.target.value)}>
-          {categories.map(category => <option key={category}>{category}</option>)}
-        </select>
-        <button type="button" onClick={apiSaveTrack}>Add Track</button>
-        {error ? <p>{error}</p> : null}
-      </div> */}
+    <div className="hscroll">
+      {tracks.map(track => (
+        <TrackPreview key={track.id} track={track} setTrack={id => setTrack(id)} />
+      ))}
     </div>
   );
 };
