@@ -8,10 +8,13 @@ import { setTracks, setError } from '../actions';
 const AddTrack = ({
   error,
   user,
+  setError,
+  setTracks,
 }) => {
   const [track, setTrackInput] = useState('');
   const [goal, setGoalInput] = useState('');
   const [category, setCategoryInput] = useState('');
+  const [success, setSuccessInput] = useState('');
 
   const categories = [
     'Time',
@@ -35,29 +38,58 @@ const AddTrack = ({
       setError(response.error);
     } else {
       setTrackInput('');
+      setCategoryInput('');
+      setGoalInput('');
+      setSuccessInput('Track saved');
       setTracks(response);
     }
   };
 
   return (
-    <div className="card">
+    <div className="card has-text-centered">
       <input
+        className="input is-rounded "
         type="text"
         value={track}
         placeholder="TrackName"
-        onChange={e => setTrackInput(e.target.value)}
+        onChange={e => {
+          setTrackInput(e.target.value);
+          setSuccessInput('');
+        }}
       />
       <input
+        className="input is-rounded "
         type="number"
         value={goal}
         placeholder="Set a goal"
-        onChange={e => setGoalInput(e.target.value)}
+        onChange={e => {
+          setGoalInput(e.target.value);
+          setSuccessInput('');
+        }}
       />
-      <select name="" value={category} onChange={e => setCategoryInput(e.target.value)}>
-        {categories.map(category => <option key={category}>{category}</option>)}
-      </select>
-      <button type="button" onClick={apiSaveTrack}>Add Track</button>
-      {error ? <p>{error}</p> : null}
+      <span className="select">
+        <select
+          name=""
+          value={category}
+          onChange={e => {
+            setCategoryInput(e.target.value);
+            setSuccessInput('');
+          }}
+        >
+          <option value="" disabled selected>Select a category</option>
+          {categories.map(category => <option key={category}>{category}</option>)}
+        </select>
+      </span>
+      <br />
+      {error ? <p className="has-text-danger">{error}</p> : null}
+      {success ? <p className="has-text-success">{success}</p> : null}
+      <button
+        className="button"
+        type="button"
+        onClick={apiSaveTrack}
+      >
+        Add Track
+      </button>
     </div>
   );
 };
@@ -67,6 +99,8 @@ AddTrack.propTypes = {
   user: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
+  setError: PropTypes.func.isRequired,
+  setTracks: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
@@ -76,6 +110,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   setTracks: tracks => dispatch(setTracks(tracks)),
+  setError: error => dispatch(setError(error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AddTrack);
