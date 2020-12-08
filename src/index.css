@@ -68,3 +68,22 @@
 .trackIcon {
   font-size: 5em;
 }
+
+.preview {
+  min-width: 20vh;
+}
+
+.actions {
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90%;
+}
+
+.actions > i {
+  font-size: 1.5em;
+  padding: 0.5em;
+}

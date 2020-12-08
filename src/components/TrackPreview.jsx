@@ -32,7 +32,7 @@ const TrackPreview = ({ track, setTrack }) => {
   };
 
   return (
-    <div key={id} className="card">
+    <div key={id} className="card preview">
       <Link
         to={`/tracks/${id}`}
         onClick={() => setTrack(id)}
@@ -49,6 +49,11 @@ const TrackPreview = ({ track, setTrack }) => {
           category={category}
         />
       </Link>
+      <div className="actions">
+        <i className="fas fa-trash-alt is-danger" />
+        <i className="fas fa-tasks" />
+        <i className="fas fa-plus-circle" />
+      </div>
     </div>
   );
 };
