@@ -38,16 +38,18 @@ const TrackPreview = ({ track, setTrack }) => {
         onClick={() => setTrack(id)}
       >
         <p className="title">{name}</p>
-        <p>{progress}</p>
-        <Circle
-          className="circle"
-          strokeWidth="10"
-          trailWidth="10"
-          percent={progress}
-        />
-        <CategoryIcon
-          category={category}
-        />
+        <div className="progress">
+          <Circle
+            className="circle"
+            strokeWidth="10"
+            trailWidth="10"
+            percent={progress}
+          />
+          <p className="progress-value">{progress}</p>
+          <CategoryIcon
+            category={category}
+          />
+        </div>
       </Link>
       <div className="actions">
         <i className="fas fa-trash-alt is-danger" />

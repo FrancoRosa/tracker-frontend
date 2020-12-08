@@ -87,3 +87,20 @@
   font-size: 1.5em;
   padding: 0.5em;
 }
+
+.progress-value {
+  position: absolute;
+  top: 3em;
+  left: 0.7em;
+  font-size: 2rem;
+  text-align: center;
+  width: 2em;
+}
+
+.progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-right: 4em;
+}
