@@ -10,6 +10,7 @@ import Navbar from './Navbar';
 import Footer from './Footer';
 import SignOut from './SignOut';
 import AddTrack from './AddTrack';
+import AddRecord from './AddRecord';
 
 const App = ({ user }) => {
   const { token, name } = user;
@@ -21,6 +22,7 @@ const App = ({ user }) => {
         <Route path="/tracks/:id" component={Records} />
         <Route path="/tracks" component={Tracks} />
         <Route path="/addtrack" component={AddTrack} />
+        <Route path="/addrecord/:id" component={AddRecord} />
         <Route path="/signin" component={SignIn} />
         <Route path="/signup" component={SignUp} />
         <Route path="/signout" component={SignOut} />

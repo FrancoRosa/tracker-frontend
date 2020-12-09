@@ -33,28 +33,27 @@ const TrackPreview = ({ track, setTrack }) => {
 
   return (
     <div key={id} className="card preview">
-      <Link
-        to={`/tracks/${id}`}
-        onClick={() => setTrack(id)}
-      >
-        <p className="title">{name}</p>
-        <div className="progress">
-          <Circle
-            className="circle"
-            strokeWidth="10"
-            trailWidth="10"
-            percent={progress}
-          />
-          <p className="progress-value">{progress}</p>
-          <CategoryIcon
-            category={category}
-          />
-        </div>
-      </Link>
+      <p className="title">{name}</p>
+      <div className="progress">
+        <Circle
+          className="circle"
+          strokeWidth="10"
+          trailWidth="10"
+          percent={progress}
+        />
+        <p className="progress-value">{progress}</p>
+        <CategoryIcon
+          className="category-icon"
+          category={category}
+        />
+      </div>
       <div className="actions">
-        <i className="fas fa-trash-alt is-danger" />
-        <i className="fas fa-tasks" />
-        <i className="fas fa-plus-circle" />
+        <Link to={`/tracks/${id}`} onClick={() => setTrack(id)}>
+          <i className="fas fa-tasks " />
+        </Link>
+        <Link to={`/addrecord/${id}`} onClick={() => setTrack(id)}>
+          <i className="fas fa-plus-circle" />
+        </Link>
       </div>
     </div>
   );
