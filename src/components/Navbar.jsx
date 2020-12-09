@@ -6,15 +6,15 @@ const Navbar = ({ signed, name }) => {
     if (!signed) {
       return (
         <div className="navbar-links">
-          <Link to="/signin" className="button">Sign in</Link>
-          <Link to="/signup" className="button">Sign up</Link>
+          <Link to="/signin" className="button is-primary is-rounded">Sign in</Link>
+          <Link to="/signup" className="button is-primary is-rounded">Sign up</Link>
         </div>
       );
     }
     return (
       <div className="navbar-links">
         <p className="navbar-item is-4 has-text-white hello">{`Hello ${name}`}</p>
-        <Link to="/signout" className="button">Sign Out</Link>
+        <Link to="/signout" className="button is-primary is-rounded">Sign Out</Link>
       </div>
     );
   };

@@ -10,8 +10,8 @@ const Footer = ({ signed }) => {
     }
     return (
       <div className="footer-buttons">
-        <Link to="/tracks" className="button">My Tracks</Link>
-        <Link to="/addtrack" className="button">Add Tracks</Link>
+        <Link to="/tracks" className="button is-dark is-rounded">My Tracks</Link>
+        <Link to="/addtrack" className="button is-dark is-rounded">Add Tracks</Link>
       </div>
     );
   };

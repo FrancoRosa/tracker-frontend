@@ -1,56 +1,27 @@
-import { Link } from 'react-router-dom';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { setError, setRecords } from '../actions';
 import { API_URL } from '../backend';
-
-const Record = ({ record }) => (
-  <div className="card">
-    <p>{record.value}</p>
-    <p>{record.created_at}</p>
-  </div>
-);
-
-Record.propTypes = {
-  record: PropTypes.shape(
-    PropTypes.object,
-  ).isRequired,
-};
+import Record from './Record';
 
 const Records = ({
   records,
   user,
-  error,
   setRecords,
-  setError,
   match,
   history,
+  tracks,
 }) => {
-  const [recordInput, setRecordInput] = useState('');
+  const track = tracks.filter(track => track.id.toString() === match.params.id)[0];
 
   const apiGetRecords = async () => {
     setError('');
     const { data: response } = await axios.get(`${API_URL}api/v1/tracks/${match.params.id}/?token=${user.token}`);
     if (response.error) setError(response.error);
     else setRecords(response);
-  };
-
-  const apiSaveRecord = async () => {
-    const obj = {
-      record: {
-        value: recordInput,
-      },
-    };
-    setError('');
-    const { data: response } = await axios.post(`${API_URL}api/v1/records/?track_id=${match.params.id}&token=${user.token}`, obj);
-    if (response.error) {
-      setError(response.error);
-    } else {
-      setRecordInput('');
-      setRecords(response);
-    }
   };
 
   const apiDeleteTrack = async () => {
@@ -69,24 +40,13 @@ const Records = ({
 
   return (
     <div className="hscroll">
-      {records.map(record => <Record key={record.id} record={record} />)}
-      <div>
-        <input
-          type="number"
-          value={recordInput}
-          onChange={e => setRecordInput(e.target.value)}
-        />
-        <button type="button" onClick={apiSaveRecord}>Add Record</button>
-        {error ? <p>{error}</p> : null}
+      <div className="track-title">
+        <h2 className="title">{`${track.name} records`}</h2>
       </div>
-      <Link to="/tracks">Tracks</Link>
-      <button
-        type="button"
-        className="button"
-        onClick={apiDeleteTrack}
-      >
-        DeleteTrack
-      </button>
+      {records.map(record => <Record key={record.id} record={record} track={track} />)}
+      <Link to="/tracks" onClick={apiDeleteTrack} className="delete-track">
+        <i className="fas fa-trash-alt" />
+      </Link>
     </div>
   );
 };
@@ -98,26 +58,26 @@ Records.propTypes = {
   user: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
-  error: PropTypes.func.isRequired,
   setRecords: PropTypes.func.isRequired,
-  setError: PropTypes.func.isRequired,
   match: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
   history: PropTypes.shape(
     PropTypes.object,
   ).isRequired,
+  tracks: PropTypes.arrayOf(
+    PropTypes.string,
+  ).isRequired,
 };
 
 const mapStateToProps = state => ({
-  error: state.error,
   records: state.records,
   user: state.user,
+  tracks: state.tracks,
 });
 
 const mapDispatchToProps = dispatch => ({
   setRecords: tracks => dispatch(setRecords(tracks)),
-  setError: error => dispatch(setError(error)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Records);

@@ -52,7 +52,7 @@ const AddRecord = ({
       {error ? <p className="has-text-danger">{error}</p> : null}
       {success ? <p className="has-text-success">{success}</p> : null}
       <button
-        className="button"
+        className="button is-rounded"
         type="button"
         onClick={apiSaveRecord}
       >

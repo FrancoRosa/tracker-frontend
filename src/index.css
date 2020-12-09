@@ -62,7 +62,7 @@
 }
 
 .circle {
-  width: 5em
+  width: 5em;
 }
 
 .preview {
@@ -86,8 +86,8 @@
 
 .progress-value {
   position: absolute;
-  top: 3em;
-  left: 0.7em;
+  top: 3.8em;
+  left: 0.8em;
   font-size: 2rem;
   text-align: center;
   width: 2em;
@@ -108,4 +108,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.track-title {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 1em;
+}
+
+.record {
+  display: flex;
+  justify-content: space-between;
+}
+
+.delete-track {
+  display: flex;
+  justify-content: center;
+  font-size: 2em;
 }
